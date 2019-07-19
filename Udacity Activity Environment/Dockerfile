@@ -16,6 +16,9 @@ RUN apt-get update && apt-get install -y \
     apt-get clean 
 
 ENV HOME /home/udacity-student
+ENV UDACITY_PROJ_NAME BCND-C6-Exercises
+ENV UDACITY_GIT_REPO https://github.com/udacity/
+
 
 # Create user 'udacity-student' with password='123456'
 RUN useradd -m udacity-student && echo "udacity-student:123456" | chpasswd && adduser udacity-student sudo
@@ -36,9 +39,11 @@ RUN bash -c 'source $HOME/.nvm/nvm.sh   && \
     npm install -g truffle@4.1.15  && \
     npm install --prefix "$HOME/.nvm/" && \
     cd "$HOME" && \
-    git clone https://github.com/udacity/BCND-C6-Exercises'
+    git clone "$UDACITY_GIT_REPO$UDACITY_PROJ_NAME"  && \
+    cd "$UDACITY_PROJ_NAME" && \
+    npm install --save-dev truffle-hdwallet-provider@1.0.6'
 
-COPY ./config-exercise.sh $HOME
+# COPY ./config-exercise.sh $HOME
 
 WORKDIR $HOME
 CMD /bin/bash
