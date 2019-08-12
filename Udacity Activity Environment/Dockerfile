@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     python \
     ssh \
     git \
+    iproute2 \
     vim && \
     apt-get install sudo && \
     apt-get clean 
@@ -35,8 +36,8 @@ RUN echo '[ -s "$NVM_DIR/bash_completion" ] && \.   "$NVM_DIR/bash_completion" #
 
 RUN bash -c 'source $HOME/.nvm/nvm.sh   && \
     nvm install node                    && \
-    npm install -g ganache-cli && \
-    npm install -g truffle@4.1.15  && \
+    npm install -g ganache-cli@6.4.4 && \
+    npm install -g truffle@4.1.14  && \
     npm install --prefix "$HOME/.nvm/" && \
     cd "$HOME" && \
     git clone "$UDACITY_GIT_REPO$UDACITY_PROJ_NAME"  && \
